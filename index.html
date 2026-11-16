@@ -1,0 +1,599 @@
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0c1115">
+
+  <meta name="description"
+    content="Równania matematyczne w Pages, Keynote i Numbers — kompletny przewodnik LaTeX autorstwa Arkadiusza Libera.">
+
+  <title>Równania matematyczne | Przewodnik LaTeX</title>
+
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0c1115;
+      --panel: #151d22;
+      --line: #2a393d;
+      --text: #f1f5f4;
+      --muted: #a1b2b5;
+      --accent: #42e0cb;
+      --accent-soft: #9af3e6;
+      --orange: #ffae62;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", Arial, sans-serif;
+      line-height: 1.65;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .container {
+      width: min(1080px, 90%);
+      margin: 0 auto;
+    }
+
+    /* Nawigacja */
+
+    header {
+      padding: 24px 0;
+      border-bottom: 1px solid var(--line);
+      background: #0c1115;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      font-size: 19px;
+      font-weight: 750;
+      letter-spacing: -0.5px;
+    }
+
+    .brand span {
+      color: var(--accent);
+    }
+
+    .nav-link {
+      color: var(--muted);
+      font-size: 14px;
+      text-decoration: none;
+      transition: color .2s;
+    }
+
+    .nav-link:hover {
+      color: var(--accent);
+    }
+
+    /* Sekcja główna */
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      align-items: center;
+      gap: 65px;
+      padding: 95px 0 100px;
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: 2px;
+      font-weight: 700;
+    }
+
+    h1 {
+      font-size: clamp(38px, 5.5vw, 64px);
+      line-height: 1.12;
+      letter-spacing: -2.5px;
+      margin: 22px 0;
+    }
+
+    h1 span {
+      color: var(--accent);
+    }
+
+    .subtitle {
+      font-size: 20px;
+      font-weight: 500;
+      color: #d1dedc;
+      margin-bottom: 15px;
+    }
+
+    .description {
+      max-width: 540px;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .author {
+      color: #d1dedc;
+      font-size: 14px;
+      margin-top: 26px;
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 25px;
+      padding: 14px 26px;
+      border-radius: 9px;
+      background: var(--accent);
+      color: #09201e;
+      font-size: 14px;
+      font-weight: 750;
+      text-decoration: none;
+      transition: transform .2s, background .2s;
+    }
+
+    .button:hover {
+      transform: translateY(-3px);
+      background: var(--accent-soft);
+    }
+
+    /* Oryginalna okładka książki */
+
+    .artwork {
+      width: 100%;
+      max-width: 390px;
+      margin: 0 auto;
+      padding: 16px;
+      background: linear-gradient(
+        145deg,
+        #1c2c30,
+        #10191c
+      );
+      border: 1px solid #345458;
+      border-radius: 20px;
+      box-shadow:
+        0 25px 70px rgba(0, 0, 0, .5),
+        0 0 55px rgba(66, 224, 203, .07);
+    }
+
+    .book-cover {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 5px;
+    }
+
+    .cover-caption {
+      margin: 13px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      text-align: center;
+    }
+
+    /* Zawartość */
+
+    .section {
+      padding: 70px 0 90px;
+      border-top: 1px solid var(--line);
+    }
+
+    h2 {
+      font-size: 30px;
+      letter-spacing: -0.8px;
+      margin: 10px 0 14px;
+    }
+
+    .section-intro {
+      color: var(--muted);
+      max-width: 680px;
+      margin-bottom: 35px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .feature {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      padding: 27px;
+      transition: border-color .2s, transform .2s;
+    }
+
+    .feature:hover {
+      border-color: #3d8d85;
+      transform: translateY(-3px);
+    }
+
+    .symbol {
+      color: var(--accent);
+      font-family: Georgia, serif;
+      font-size: 31px;
+      margin-bottom: 12px;
+    }
+
+    .feature:nth-child(2) .symbol {
+      color: var(--orange);
+    }
+
+    .feature h3 {
+      font-size: 17px;
+      margin: 0 0 10px;
+    }
+
+    .feature p {
+      font-size: 14px;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    /* Przykładowy wzór */
+
+    .formula-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      padding: 35px;
+      margin-top: 35px;
+    }
+
+    .formula-card h3 {
+      margin: 0 0 20px;
+      font-size: 17px;
+    }
+
+    .equation {
+      text-align: center;
+      overflow-x: auto;
+      padding: 30px 0;
+      font-size: 28px;
+      color: #b5fff1;
+    }
+
+    .code {
+      margin-top: 22px;
+      background: #091014;
+      border: 1px solid #2a4547;
+      border-radius: 9px;
+      padding: 18px;
+      overflow-x: auto;
+      color: #8ff1de;
+      font-family: ui-monospace, SFMono-Regular,
+        Consolas, monospace;
+      font-size: 13px;
+      white-space: pre;
+    }
+
+    .note {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 16px;
+    }
+
+    /* Stopka */
+
+    footer {
+      padding: 30px 0;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Urządzenia mobilne */
+
+    @media (max-width: 760px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 65px 0;
+        gap: 45px;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        letter-spacing: -1.5px;
+      }
+
+      .artwork {
+        max-width: 350px;
+      }
+
+      .section {
+        padding: 50px 0 65px;
+      }
+
+      .formula-card {
+        padding: 22px;
+      }
+
+      .equation {
+        font-size: 20px;
+      }
+
+      .nav-link {
+        font-size: 12px;
+      }
+    }
+  </style>
+
+  <!-- MathJax: renderowanie wzorów LaTeX -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+
+  <script defer
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+</head>
+
+<body>
+
+  <!-- Nawigacja -->
+
+  <header>
+    <div class="container nav">
+
+      <div class="brand">
+        Równania<span>Matematyczne.</span>
+      </div>
+
+      <a class="nav-link"
+         href="https://writingin.com/rownania_matematyczne_pages_latex/rownania_matematyczne_pages_latex.html"
+         target="_blank"
+         rel="noopener noreferrer">
+        Oficjalna strona książki ↗
+      </a>
+
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Prezentacja książki -->
+
+    <section class="container hero">
+
+      <div class="hero-content">
+
+        <div class="eyebrow">
+          Kompletny przewodnik LaTeX
+        </div>
+
+        <h1>
+          Matematyka zapisana<br>
+          <span>z precyzją.</span>
+        </h1>
+
+        <p class="subtitle">
+          Równania matematyczne w Pages, Keynote i Numbers
+        </p>
+
+        <p class="description">
+          Praktyczny przewodnik po profesjonalnym składzie
+          wzorów matematycznych w aplikacjach Apple Pages,
+          Keynote i Numbers. Poznaj składnię LaTeX,
+          symbole matematyczne, ułamki, macierze, wektory,
+          operatory, odstępy, czcionki oraz zaawansowane
+          techniki formatowania równań.
+        </p>
+
+        <p class="description">
+          Książka zawiera sprawdzone przykłady
+          i gotowy kod, który można kopiować,
+          modyfikować oraz wykorzystywać podczas
+          tworzenia własnych dokumentów technicznych,
+          naukowych i edukacyjnych.
+        </p>
+
+        <p class="author">
+          Autor: <strong>Arkadiusz Liber</strong>
+        </p>
+
+        <a class="button"
+           href="https://writingin.com/rownania_matematyczne_pages_latex/rownania_matematyczne_pages_latex.html"
+           target="_blank"
+           rel="noopener noreferrer">
+          Poznaj książkę ↗
+        </a>
+
+      </div>
+
+      <!-- Oryginalna przednia okładka -->
+
+      <div class="artwork">
+
+        <img
+          class="book-cover"
+          src="https://writingin.com/rownania_matematyczne_pages_latex/assets/rownania_matematyczne_pages_latex_front_cover.jpeg"
+          alt="Oryginalna okładka książki Równania matematyczne w Pages, Keynote i Numbers autorstwa Arkadiusza Libera"
+          width="700"
+          height="1000"
+          fetchpriority="high"
+        >
+
+        <p class="cover-caption">
+          Oryginalna okładka książki · WritingIn
+        </p>
+
+      </div>
+
+    </section>
+
+    <!-- Zawartość książki -->
+
+    <section class="section">
+
+      <div class="container">
+
+        <div class="eyebrow">
+          Co znajdziesz w książce?
+        </div>
+
+        <h2>
+          Od podstawowych symboli do złożonych równań
+        </h2>
+
+        <p class="section-intro">
+          Poznaj praktyczne metody tworzenia estetycznych
+          i poprawnie sformatowanych wzorów matematycznych
+          w edytorach równań aplikacji Apple.
+        </p>
+
+        <div class="features">
+
+          <article class="feature">
+
+            <div class="symbol">∑</div>
+
+            <h3>Podstawowe oznaczenia</h3>
+
+            <p>
+              Ułamki, potęgi, pierwiastki, litery greckie,
+              operatory, symbole matematyczne oraz
+              prawidłowe odstępy.
+            </p>
+
+          </article>
+
+          <article class="feature">
+
+            <div class="symbol">[ ]</div>
+
+            <h3>Zaawansowane struktury</h3>
+
+            <p>
+              Macierze, wektory, układy równań,
+              wyrównywanie wyrażeń, czcionki,
+              kolory i rozbudowane konstrukcje.
+            </p>
+
+          </article>
+
+          <article class="feature">
+
+            <div class="symbol">𝑓(x)</div>
+
+            <h3>Praktyczne przykłady LaTeX</h3>
+
+            <p>
+              Zweryfikowane przykłady kodu,
+              które można kopiować i dostosowywać
+              do własnych dokumentów.
+            </p>
+
+          </article>
+
+        </div>
+
+        <!-- Przykład matematyczny -->
+
+        <div class="formula-card">
+
+          <h3>
+            Przykład profesjonalnego składu matematycznego
+          </h3>
+
+          <div class="equation">
+            \[
+              \displaystyle
+              \int\limits_{-\infty}^{+\infty}
+              \mathrm{e}^{-x^2}\,\mathrm{d}x
+              = \sqrt{\pi}
+            \]
+          </div>
+
+          <p class="note">
+            Całka Gaussa jest klasyczną tożsamością
+            matematyczną. Granice całkowania umieszczono
+            nad i pod znakiem całki. Litery e oraz d
+            zapisano czcionką prostą, natomiast
+            zmienna x pozostaje kursywą.
+          </p>
+
+          <div class="code">\displaystyle\int\limits_{-\infty}^{+\infty} \mathrm{e}^{-x^2}\,\mathrm{d}x = \sqrt{\pi}</div>
+
+          <p class="note">
+            Wzór jest renderowany za pomocą MathJax.
+            Przykład ilustruje poprawną notację matematyczną
+            i świadome stosowanie zasad typografii.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Stopka -->
+
+  <footer>
+
+    <div class="container footer-inner">
+
+      <span>
+        Równania matematyczne — Przewodnik LaTeX
+      </span>
+
+      <span>
+        Niezależna prezentacja książki ·
+        <a
+          href="https://writingin.com/rownania_matematyczne_pages_latex/rownania_matematyczne_pages_latex.html"
+          target="_blank"
+          rel="noopener noreferrer">
+          Oficjalna strona
+        </a>
+      </span>
+
+    </div>
+
+  </footer>
+
+</body>
+</html>
